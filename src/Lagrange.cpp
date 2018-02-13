@@ -17,6 +17,10 @@ double l(const std::size_t i, const double x, const std::vector<std::pair<double
   return result;
 }
 
+//@param points - vector<x,y>,
+//@param n - order of polinomium
+//@param x - counting point
+
 double countLagrange(const std::vector<std::pair<double, double>> &points, const std::size_t n, const double x)
 {
 

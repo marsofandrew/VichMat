@@ -15,12 +15,10 @@ double function(const double z)
   return 1 / (std::pow(M_E, z) * (z + x));
 }
 
-double a = 0;
-double b = 20;
-const double xCountStart = 1.1875;
-
-void lab1(const double xStart, const double xEnd, const double h)
+void lab1(const double xStart, const double xEnd, const double h, const double xCountStart)
 {
+  double down = 0;
+  double up = 20;
   std::vector<std::pair<double, double>> points;
 
   for (x = xStart; x <= xEnd; x += h) {
@@ -32,7 +30,7 @@ void lab1(const double xStart, const double xEnd, const double h)
     double posn = 0;
     int flag = 0;
 
-    quanc8(&function, a, b, epsA, epsR, &result, &error, &nofun, &posn, &flag);
+    quanc8(&function, down, up, epsA, epsR, &result, &error, &nofun, &posn, &flag);
 
     if (flag == 0) {
       points.emplace_back(x, result);
