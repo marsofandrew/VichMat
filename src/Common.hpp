@@ -5,6 +5,7 @@
 #ifndef LABS_COMMON_HPP
 #define LABS_COMMON_HPP
 
+#include <cmath>
 #include <vector>
 
 double countLagrange(const std::vector<std::pair<double, double>> &points, const std::size_t n, const double x);
@@ -18,17 +19,16 @@ namespace detail
   }
 }
 
-template<typename T, const std::size_t rows, const std::size_t columns>
-double countNorm(const T (&matrix)[rows][columns])
+template<const std::size_t rows, const std::size_t columns>
+double countNorm(const double (&matrix)[rows][columns])
 {
-  T result = 0;
-  for (std::size_t i = 0; i < rows; i++) {
-    T columnSum = 0;
-    for (const T t:matrix[i]) {
-      columnSum += detail::abs(t);
+  double result = 0;
+  for (int i = 0; i < rows; ++i) {
+    for (int j = 0; j < columns; ++j) {
+      result += std::abs(matrix[i][j]) * std::abs(matrix[i][j]);
     }
-    result = std::max(result, columnSum);
   }
+  result = std::sqrt(result);
   return result;
 }
 

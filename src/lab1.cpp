@@ -47,12 +47,29 @@ void lab1(const double xStart, const double xEnd, const double h, const double x
   double d[9];
   int flag = 0;
   spline(9, 0, 0, 0, 0, xArray, yArray, b, c, d, &flag);//TODO: ask about unnecessary arguments
+
   for (int k = 0; k <= 7; k++) {
     double xp = xCountStart + k * h;
     int last = 0;
     double lagrange = countLagrange(points, 8, xp);
     double spline_ = seval(9, xp, xArray, yArray, b, c, d, &last);
-    std::cout << k << ")  " << "x = " << xp << "      " << "Lagrange = " << lagrange << "       Spline = "
-              << spline_ << "   abs(L-S) = " << std::abs(lagrange - spline_) << "\n";
+    double epsA = 0;
+    double epsR = 0.0001;
+    double result = 0;
+    double error = 0;
+    int nofun = 0;
+    double posn = 0;
+    int flag = 0;
+    x = xp;
+    quanc8(&function, down, up, epsA, epsR, &result, &error, &nofun, &posn, &flag);
+
+    if (flag == 0) {
+
+      std::cout << k << ")  " << "x = " << xp << "      " << "QUANC8  = " << result << "  Lagrange = " << lagrange
+                << "       Spline = "
+                << spline_ << "   abs(L-S) = " << std::abs(lagrange - spline_) << "    abs(Q-L) = "
+                << std::abs(result - lagrange) << "   abs(Q-S) = " << std::abs(result - spline_) <<
+                "\n";
+    }
   }
 }

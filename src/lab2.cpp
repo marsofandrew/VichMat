@@ -40,11 +40,21 @@ void lab2(const std::initializer_list<double> p)
                            {6,      -2,  -4,  2,  -8, -12, 3,   -3},
                            {-6,     -6,  0,   -8, 0,  5,   -15, 0},
                            {0,      7,   6,   0,  -5, -8,  -5,  -3}};
+
+    const double array[8][8] = {{p1 + 6, 2,   6,   8,  -2, 1,   8,   -5},
+                           {6,      -22, -2,  -1, 0,  5,   -6,  4},
+                           {-2,     -3,  -16, 0,  0,  -4,  2,   -5},
+                           {1,      1,   4,   9,  1,  0,   0,   -6},
+                           {0,      2,   0,   2,  -3, -5,  7,   5},
+                           {6,      -2,  -4,  2,  -8, -12, 3,   -3},
+                           {-6,     -6,  0,   -8, 0,  5,   -15, 0},
+                           {0,      7,   6,   0,  -5, -8,  -5,  -3}};
     double cond = 1;
     int pivot[8];
     int flag = 0;
     decomp(8, 8, &array1[0][0], &cond, pivot, &flag);
     std::cout << "p = " << p1 << " cond = " << cond << "  ";
+
     //<COUNT INVERSE MATRIX>
     double inverse[8][8] = {};
     for (int i = 0; i < 8; ++i) {
@@ -57,12 +67,13 @@ void lab2(const std::initializer_list<double> p)
     }
     //<COUNT INVERSE MATRIX>
 
+
     double matrixEn[8][8] = {};
 // <--------------------multiple matrix----------------->
     for (int i = 0; i < 8; i++) {
-      for (int k = 0; k < 8; k++) {
-        for (int j = 0; j < 8; j++) {
-          matrixEn[i][j] += array1[i][j] * inverse[k][j];
+      for (int j = 0; j< 8; j++){
+        for (int k = 0; k< 8;k++){
+          matrixEn[i][j] += array[i][k] * inverse[k][j];
         }
       }
     }
